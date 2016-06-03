@@ -1,16 +1,16 @@
 {
   "name": "react-template",
-  "version": "0.0.0",
-  "description": "A chat example to showcase how to use `socket.io` with a static `express` server with `async` for control flow.",
+  "version": "0.0.1",
+  "description": "react template",
   "main": "server.js",
-  "author": "Mostafa Eweda <mo.eweda@gmail.com>",
+  "author": "nik scott",
   "dependencies": {
     "async": "~0.2.8",
     "express": "~3.2.4",
     "socket.io": "~0.9.14"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "webpack-dev-server --port $PORT --host $IP  --content-base dist/"
   },
   "devDependencies": {
     "babel-core": "^6.7.5",
@@ -24,7 +24,8 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.14",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "bootstrap": "^3.3.4"
   },
   "license": "ISC"
 }

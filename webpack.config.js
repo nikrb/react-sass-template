@@ -4,7 +4,7 @@ var buildPath = path.join(__dirname, 'dist');
 
 module.exports = {
   context: srcPath,
-  entry: path.join(srcPath, 'js', 'client.js'),
+  entry: path.join(srcPath, 'js', 'app.js'),
   output: {
       path: buildPath,
       filename: "bundle.js"
@@ -24,6 +24,19 @@ module.exports = {
               test: /\.scss$/,
               loaders: [ 'style', 'css', 'sass' ]
           },
+          { test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+          { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+          { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
+          { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+          {
+            test: /\.less$/,
+            loaders: ['style','css','less']
+          },
+          {
+            test: /\.css$/,
+            loaders: ['style','css']
+          },
+          { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
       ]
   }
 };
