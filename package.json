@@ -6,11 +6,13 @@
   "author": "nik scott",
   "dependencies": {
     "async": "~0.2.8",
+    "body-parser": "^1.15.1",
     "express": "~3.2.4",
     "socket.io": "~0.9.14"
   },
   "scripts": {
-    "start": "webpack-dev-server --port $PORT --host $IP  --content-base dist/"
+    "start": "webpack-dev-server --port $PORT --host $IP  --content-base dist/",
+    "start-api": "node api/server.js"
   },
   "devDependencies": {
     "babel-core": "^6.7.5",

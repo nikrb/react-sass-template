@@ -9,6 +9,9 @@ module.exports = {
       path: buildPath,
       filename: "bundle.js"
   },
+  proxy: {
+    '/api/*' : 'https://0.0.0.0:8081/',
+  },
   devtool : 'source-map',
   module: {
       loaders: [
