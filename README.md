@@ -1,3 +1,15 @@
+
+trying to run backend api with webpack
+finding process:
+lsof -i tcp:$PORT
+
+run webpack for frontend
+npm start
+
+run server as normal
+npm run start-api
+
+
 react getting started:
 https://github.com/FreeCodeCamp/FreeCodeCamp/wiki/Setting-Up-A-React-ES6-Webpack-Project
 
