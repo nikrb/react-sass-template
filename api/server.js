@@ -1,19 +1,27 @@
-
-var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
+var MongoClient = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectID;
+
+var db;
+var url = 'mongodb://localhost:27017/commentsdb';
+MongoClient.connect(url, function(err, dbc) {
+  if( err){
+    console.log( "mongo connect error:", err);
+  }
+  db = dbc;
+});
+
 var app = express();
 
-var COMMENTS_FILE = path.join(__dirname, 'comments.json');
+app.set('port', 8081); //  (process.env.PORT || 8080));
 
-app.set('port', 8080); //  (process.env.PORT || 3000));
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-// app.use('/', express.static(path.join(__dirname, 'dist/index.html')));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended: true}));
-
-/*/ Additional middleware which will set headers that we need on each request.
+// Additional middleware which will set headers that we need on each request.
 app.use(function(req, res, next) {
     // Set permissive CORS header - this allows this server to be used only as
     // an API server in conjunction with something like webpack-dev-server.
@@ -22,49 +30,30 @@ app.use(function(req, res, next) {
     // Disable caching so we'll always get the latest comments.
     res.setHeader('Cache-Control', 'no-cache');
     next();
-});*/
+});
 
 app.get('/api/comments', function(req, res) {
-  fs.readFile(COMMENTS_FILE, function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    res.json(JSON.parse(data));
+  db.collection("comments").find({}).toArray(function(err, docs) {
+    console.log( "get/api/comments results:", docs);
+    res.json(docs);
   });
 });
 
 app.post('/api/comments', function(req, res) {
-  fs.readFile(COMMENTS_FILE, function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
-    }
-    var comments = JSON.parse(data);
-    // NOTE: In a real implementation, we would likely rely on a database or
-    // some other approach (e.g. UUIDs) to ensure a globally unique id. We'll
-    // treat Date.now() as unique-enough for our purposes.
-    var newComment = {
-      id: Date.now(),
-      author: req.body.author,
-      text: req.body.text,
-    };
-    comments.push(newComment);
-    fs.writeFile(COMMENTS_FILE, JSON.stringify(comments, null, 4), function(err) {
-      if (err) {
-        console.error(err);
-        process.exit(1);
-      }
-      res.json(comments);
-    });
+  var newComment = {
+    created: new Date( req.body.created),
+    author: req.body.author,
+    text: req.body.text,
+  };
+  console.log( "creating new comment:", newComment);
+  db.collection("comments").insertOne(newComment, function(err, result) {
+    var newId = result.insertedId;
+    console.log( "new comment id:", newId);
+    res.json( { new_id: newId, created: newComment.created });
   });
 });
 
-app.get( '/*', function( req, res){
-  res.sendfile( path.join(__dirname, '../src/index.html'));
-});
 
 app.listen(app.get('port'), function() {
-  console.log('Server started: port' + app.get('port') + '/');
+  console.log('Server started: https://localhost:' + app.get('port') + '/');
 });
-
