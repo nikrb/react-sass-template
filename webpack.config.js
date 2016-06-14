@@ -10,6 +10,11 @@ module.exports = {
       filename: "bundle.js"
   },
   devtool : 'source-map',
+  proxy: {
+    '/api/*' : {
+      target: 'https://0.0.0.0:8081'
+    }
+  },
   module: {
       loaders: [
           {
