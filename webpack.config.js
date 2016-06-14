@@ -24,19 +24,10 @@ module.exports = {
               test: /\.scss$/,
               loaders: [ 'style', 'css', 'sass' ]
           },
-          { test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-          { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-          { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
-          { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-          {
-            test: /\.less$/,
-            loaders: ['style','css','less']
-          },
           {
             test: /\.css$/,
             loaders: ['style','css']
-          },
-          { test: /bootstrap\/js\//, loader: 'imports?jQuery=jquery' },
+          }
       ]
   }
 };
