@@ -39,3 +39,5 @@ jspm_packages
 
 # we don't need the built files do we?
 dist/
+
+webpack.config.js.bakup
