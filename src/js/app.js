@@ -3,12 +3,9 @@ import ReactDOM from 'react-dom';
 import style from '../scss/app.scss';
 import http from 'http';
 
-// require('../../node_modules/bootstrap/dist/css/bootstrap.css');
-
 // es5
 var Main = React.createClass({
   getInitialState: function(){
-    console.log( "@getInitialState");
     return { data: []};
   },
   loadData: function(){
@@ -19,13 +16,12 @@ var Main = React.createClass({
     });
   },
   componentDidMount(){
-    console.log( "@componentDidMount");
     this.loadData();
   },
   render: function(){
     return (
       <div className="example container">
-        <h1>This is two cool app!</h1>
+        <h1>This is three cool app!</h1>
         <p>{this.state.data}</p>
       </div>
     );
