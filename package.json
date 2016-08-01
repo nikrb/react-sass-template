@@ -11,8 +11,8 @@
     "socket.io": "~0.9.14"
   },
   "scripts": {
-    "start": "webpack-dev-server --port $PORT --host $IP  --content-base dist/",
-    "start-api": "node api/server.js"
+    "start": "webpack-dev-server --port $PORT --host $IP  --content-base dist/ &",
+    "start-api": "node api/server.js &"
   },
   "devDependencies": {
     "babel-core": "^6.7.5",
