@@ -34,8 +34,12 @@ app.use(function(req, res, next) {
 
 app.get('/api/comments', function(req, res) {
   db.collection("comments").find({}).toArray(function(err, docs) {
-    console.log( "get/api/comments results:", docs);
-    res.json(docs);
+    if( err){
+      console.log( "GET /api/comments failed:", err)
+    } else {
+      console.log( "get/api/comments results:", docs);
+      res.json(docs);
+    }
   });
 });
 
@@ -47,9 +51,13 @@ app.post('/api/comments', function(req, res) {
   };
   console.log( "creating new comment:", newComment);
   db.collection("comments").insertOne(newComment, function(err, result) {
-    var newId = result.insertedId;
-    console.log( "new comment id:", newId);
-    res.json( { new_id: newId, created: newComment.created });
+    if( err){
+      console.log( "POST /api/comments failed:", err);
+    } else {
+      var newId = result.insertedId;
+      console.log( "new comment id:", newId);
+      res.json( { new_id: newId, created: newComment.created });
+    }
   });
 });
 
