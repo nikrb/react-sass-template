@@ -12,7 +12,8 @@ module.exports = {
   devtool : 'source-map',
   proxy: {
     '/api/*' : {
-      target: 'https://0.0.0.0:8081'
+      target: 'https://0.0.0.0:8081',
+      secure: false
     }
   },
   module: {
