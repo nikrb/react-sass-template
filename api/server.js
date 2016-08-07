@@ -15,9 +15,10 @@ MongoClient.connect(url, function(err, dbc) {
 
 var app = express();
 
-app.set('port', 8081); // (process.env.PORT || 8080));
+app.set('port', (process.env.PORT || 8080));
 
-// app.use('/', express.static(path.join(__dirname, '../src')));
+app.use('/', express.static(path.join(__dirname, '../dist')));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
