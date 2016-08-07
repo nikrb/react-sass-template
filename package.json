@@ -6,6 +6,7 @@
   "author": "nik scott",
   "dependencies": {
     "async": "~0.2.8",
+    "axios": "^0.13.1",
     "body-parser": "^1.15.1",
     "express": "~3.2.4",
     "socket.io": "~0.9.14"
